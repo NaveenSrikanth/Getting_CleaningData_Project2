@@ -6,20 +6,20 @@
 #5)From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 #Reading the data
-testData <- read.table("C:/Users/NAVEEN SRIKANTHD/Downloads/Dataset/UCI HAR Dataset/test/X_test.txt",header=FALSE)
-Test_Act <- read.table("C:/Users/NAVEEN SRIKANTHD/Downloads/Dataset/UCI HAR Dataset/test/y_test.txt",header=FALSE)
-Test_Sub <- read.table("C:/Users/NAVEEN SRIKANTHD/Downloads/Dataset/UCI HAR Dataset/test/subject_test.txt",header=FALSE)
-trainData <- read.table("C:/Users/NAVEEN SRIKANTHD/Downloads/Dataset/UCI HAR Dataset/train/X_train.txt",header=FALSE)
-Train_Act <- read.table("C:/Users/NAVEEN SRIKANTHD/Downloads/Dataset/UCI HAR Dataset/train/y_train.txt",header=FALSE)
-Train_Sub <- read.table("C:/Users/NAVEEN SRIKANTHD/Downloads/Dataset/UCI HAR Dataset/train/subject_train.txt",header=FALSE)
+testData <- read.table("UCI HAR Dataset/test/X_test.txt",header=FALSE)
+Test_Act <- read.table("UCI HAR Dataset/test/y_test.txt",header=FALSE)
+Test_Sub <- read.table("UCI HAR Dataset/test/subject_test.txt",header=FALSE)
+trainData <- read.table("UCI HAR Dataset/train/X_train.txt",header=FALSE)
+Train_Act <- read.table("UCI HAR Dataset/train/y_train.txt",header=FALSE)
+Train_Sub <- read.table("UCI HAR Dataset/train/subject_train.txt",header=FALSE)
 
 
-activities <- read.table("C:/Users/NAVEEN SRIKANTHD/Downloads/Dataset/UCI HAR Dataset/activity_labels.txt",header=FALSE,colClasses="character")
+activities <- read.table("UCI HAR Dataset/activity_labels.txt",header=FALSE,colClasses="character")
 Test_Act$V1 <- factor(Test_Act$V1,levels=activities$V1,labels=activities$V2)
 Train_Act$V1 <- factor(Train_Act$V1,levels=activities$V1,labels=activities$V2)
 
 #Uses descriptive activity names to name the activities in the data set
-features <- read.table("C:/Users/NAVEEN SRIKANTHD/Downloads/Dataset/UCI HAR Dataset/features.txt",header=FALSE,colClasses="character")
+features <- read.table("UCI HAR Dataset/features.txt",header=FALSE,colClasses="character")
 colnames(testData)<-features$V2
 colnames(trainData)<-features$V2
 colnames(Test_Act)<-c("Activity")
@@ -45,4 +45,4 @@ DT <- data.table(DataSet)
 tidy<-DT[,lapply(.SD,mean),by="Activity,Subject"]
 
 #Below code gives the consolidated dataset 
-write.table(tidy,file="E:/tidy.txt",sep=",",row.names = FALSE)
+write.table(tidy,file="tidy.txt",sep=",",row.names = FALSE)
